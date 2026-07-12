@@ -234,17 +234,17 @@ Possible enhancements include:
 
 ## Screenshots
 
-### Exploratory Data Analysis
+### Homepage
 
-```markdown
-![EDA](assets/eda.png)
-```
 
-### Model Evaluation
+![EDA](assets/home.png)
 
-```markdown
-![Evaluation](assets/model-evaluation.png)
-```
+
+### Output
+
+
+![Evaluation](assets/output.png)
+
 
 ---
 
