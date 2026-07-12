@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Adult Income Prediction</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#4f46e5;
+    --primary-hover:#4338ca;
+    --secondary:#0ea5e9;
+
+    --card-bg:rgba(255,255,255,.96);
+
+    --heading:#0f172a;
+    --subheading:#475569;
+    --label:#334155;
+    --text:#1e293b;
+
+    --border:#dbe4f0;
+    --input-bg:#f8fafc;
+
+    --shadow:0 18px 45px rgba(15,23,42,.18);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px 20px;
+
+    background:linear-gradient(
+        135deg,
+        #4facfe 0%,
+        #00c6fb 35%,
+        #43e97b 100%
+    );
+
+}
+
+.container{
+
+    width:100%;
+    max-width:1450px;
+
+    background:var(--card-bg);
+
+    border-radius:22px;
+
+    padding:40px;
+
+    box-shadow:var(--shadow);
+
+}
+
+h1{
+
+    text-align:center;
+
+    color:var(--heading);
+
+    font-size:38px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    margin-bottom:10px;
+
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:var(--subheading);
+
+    font-size:17px;
+
+    margin-bottom:35px;
+
+    line-height:1.6;
+
+}
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:22px;
+
+}
+
+.field{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.field label{
+
+    color:var(--label);
+
+    font-size:14px;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+input,
+select{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    background:var(--input-bg);
+
+    color:var(--text);
+
+    font-size:15px;
+
+    transition:.3s ease;
+
+    outline:none;
+
+}
+
+input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+input:hover,
+select:hover{
+
+    border-color:#94a3b8;
+
+}
+
+input:focus,
+select:focus{
+
+    border-color:var(--primary);
+
+    background:#fff;
+
+    box-shadow:0 0 0 4px rgba(79,70,229,.15);
+
+}
+
+.button-container{
+
+    margin-top:40px;
+
+    text-align:center;
+
+}
+
+button{
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    padding:15px 45px;
+
+    border-radius:50px;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color:#fff;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    letter-spacing:.4px;
+
+    transition:.3s;
+
+    box-shadow:0 10px 25px rgba(79,70,229,.35);
+
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 18px 35px rgba(79,70,229,.45);
+
+}
+
+button:active{
+
+    transform:scale(.98);
+
+}
+
+.loader{
+
+    display:none;
+
+    margin-top:20px;
+
+    text-align:center;
+
+    color:var(--heading);
+
+    font-size:17px;
+
+    font-weight:600;
+
+}
+
+.result{
+
+    display:none;
+
+    margin-top:35px;
+
+    background:#eef7ff;
+
+    border-left:6px solid var(--primary);
+
+    border-radius:15px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(15,23,42,.08);
+
+}
+
+.result h2{
+
+    color:var(--heading);
+
+    margin-bottom:15px;
+
+    font-size:28px;
+
+}
+
+.result p{
+
+    color:var(--text);
+
+    font-size:20px;
+
+    margin:10px 0;
+
+    font-weight:500;
+
+}
+
+.result strong{
+
+    color:var(--primary);
+
+}
+
+@media(max-width:1200px){
+
+.form-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.container{
+
+padding:30px;
+
+}
+
+.form-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+h1{
+
+font-size:32px;
+
+}
+
+}
+
+@media(max-width:520px){
+
+body{
+
+padding:20px 12px;
+
+}
+
+.container{
+
+padding:25px;
+
+}
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+h1{
+
+font-size:28px;
+
+}
+
+.subtitle{
+
+font-size:15px;
+
+}
+
+button{
+
+width:100%;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Adult Income Prediction</h1>
+
+<p class="subtitle">
+Predict whether income is ≤50K or >50K using Machine Learning
+</p>
+
+<div class="form-grid">
+
+<div class="field">
+<label>Age</label>
+<input type="number" id="age" value="38">
+</div>
+
+<div class="field">
+<label>Workclass</label>
+<select id="workclass">
+<option>Private</option>
+<option>Self-emp-not-inc</option>
+<option>Local-gov</option>
+<option>?</option>
+<option>State-gov</option>
+<option>Self-emp-inc</option>
+<option>Federal-gov</option>
+<option>Without-pay</option>
+<option>Never-worked</option>
+</select>
+</div>
+
+<div class="field">
+<label>Fnlwgt</label>
+<input type="number" id="fnlwgt" value="215646">
+</div>
+
+<div class="field">
+<label>Education Number</label>
+<input type="number" id="education_num" value="9">
+</div>
+
+<div class="field">
+<label>Occupation</label>
+<select id="occupation">
+<option>Prof-specialty</option>
+<option>Craft-repair</option>
+<option>Exec-managerial</option>
+<option>Adm-clerical</option>
+<option>Sales</option>
+<option>Other-service</option>
+<option>Machine-op-inspct</option>
+<option>?</option>
+<option>Transport-moving</option>
+<option>Handlers-cleaners</option>
+<option>Farming-fishing</option>
+<option>Tech-support</option>
+<option>Protective-serv</option>
+<option>Priv-house-serv</option>
+<option>Armed-Forces</option>
+</select>
+</div>
+
+<div class="field">
+<label>Race</label>
+<select id="race">
+<option>White</option>
+<option>Black</option>
+<option>Asian-Pac-Islander</option>
+<option>Amer-Indian-Eskimo</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="field">
+<label>Sex</label>
+<select id="sex">
+<option>Male</option>
+<option>Female</option>
+</select>
+</div>
+
+<div class="field">
+<label>Capital Gain</label>
+<input type="number" id="capital_gain" value="0">
+</div>
+
+<div class="field">
+<label>Capital Loss</label>
+<input type="number" id="capital_loss" value="0">
+</div>
+
+<div class="field">
+<label>Hours Per Week</label>
+<input type="number" id="hours_per_week" value="40">
+</div>
+
+</div>
+
+<div class="button-container">
+
+<button onclick="predictIncome()">
+Predict Income
+</button>
+
+</div>
+
+<div class="loader" id="loader">
+Predicting...
+</div>
+
+<div class="result" id="result">
+
+<h2>Prediction Result</h2>
+
+<p id="label"></p>
+
+<p id="confidence"></p>
+
+</div>
+
+</div>
+
+<script>
+
+async function predictIncome(){
+
+document.getElementById("loader").style.display="block";
+document.getElementById("result").style.display="none";
+
+const payload={
+
+age:parseInt(document.getElementById("age").value),
+
+workclass:document.getElementById("workclass").value,
+
+fnlwgt:parseFloat(document.getElementById("fnlwgt").value),
+
+education_num:parseInt(document.getElementById("education_num").value),
+
+occupation:document.getElementById("occupation").value,
+
+race:document.getElementById("race").value,
+
+sex:document.getElementById("sex").value,
+
+capital_gain:parseFloat(document.getElementById("capital_gain").value),
+
+capital_loss:parseFloat(document.getElementById("capital_loss").value),
+
+hours_per_week:parseFloat(document.getElementById("hours_per_week").value)
+
+};
+
+try{
+
+const response=await fetch("/predict",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(payload)
+
+});
+
+const data=await response.json();
+
+document.getElementById("loader").style.display="none";
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("label").innerHTML=
+"<strong>Prediction:</strong> "+data.label;
+
+document.getElementById("confidence").innerHTML=
+"<strong>Confidence:</strong> "+(data.confidence*100).toFixed(2)+" %";
+
+}
+
+catch(error){
+
+document.getElementById("loader").style.display="none";
+
+alert("Prediction Failed.");
+
+console.log(error);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
